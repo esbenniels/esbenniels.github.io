@@ -66,4 +66,17 @@
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
-}
+  }
+
+
+document.getElementById("gen-btn").addEventListener("click", (e) => {
+  e.preventDefault();
+  var projID = document.getElementById("inputProjID").value;
+  var getURL = "https://api.qrserver.com/v1/create-qr-code/?data=https://esbenniels.github.io/?proj-id=" + projID + ";size=100x100";
+  console.log(getURL);
+  var img = document.createElement("img");
+  img.src = getURL;
+  img.alt = "";
+  img.title = "";
+  document.getElementById("qrcode").appendChild(img);
+})
