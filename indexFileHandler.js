@@ -16,6 +16,10 @@ const firebaseConfig = {
 
  const app = initializeApp(firebaseConfig);
 
+ function removeSpaces(input) {
+    return input.replace(" ", "_");
+  }
+
 import {getStorage, ref, uploadBytes} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 const storage = getStorage(app);
 
@@ -29,11 +33,21 @@ document.getElementById("submit").addEventListener("click", (e) => {
         alert("Statusfelt er påkrævet");
     } else {
         // uploading images to Firebase Storage: use resulting image path
-        for (var image in document.getElementById("upload").files) {
-            let ImageRef = ref(storage, "projects/" + URLParams.get("proj-id") + "/" + selectVal + "/" + document.getElementById("upload").files[image].name);
-            uploadBytes(ImageRef, document.getElementById("upload").files[image]);
+        console.log(images.length);
+        var imagePath;
+        if (images.length > 0) {
+          imagePath = "Projects/"+URLParams.get("proj-id")+"/"+removeSpaces(selectVal);
+        } else {
+          imagePath = "None";
+        }
+        console.log(imagePath);
+        for (var image in images) {
+            let ImageRef = ref(storage, "Projects/" + URLParams.get("proj-id") + "/" + removeSpaces(selectVal) + "/" + images[image].name);
+            uploadBytes(ImageRef, images[image]).then((e) => {
+                console.log("uploaded file");
+            })
         }  
-        alert("Opdatering Gennemført");
+        // alert("Opdatering Gennemført");
     }
     
   })

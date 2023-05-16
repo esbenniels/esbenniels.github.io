@@ -14,6 +14,10 @@
     measurementId: "G-C9JBQH20T0"
   };
 
+  function removeSpaces(input) {
+    return input.replace(" ", "_");
+  }
+
   const app = initializeApp(firebaseConfig);
 
   import {getDatabase, ref, set, onValue, child, get, push, update} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
@@ -46,10 +50,11 @@
         var dateString = String(today.getDate()).padStart(2, '0') + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + today.getFullYear();
         var imagePath;
         if (images.length > 0) {
-          imagePath = "Projects/"+URLParams.get("proj-id")+"/"+selectVal;
+          imagePath = "Projects/"+URLParams.get("proj-id")+"/"+removeSpaces(selectVal);
         } else {
           imagePath = "None";
         }
+        console.log(imagePath);
 
         set(ref(database, "Projects/" + URLParams.get("proj-id") + "/checkpoints/" + selectVal), {
             Completed: true,
@@ -57,7 +62,6 @@
             ImagePath: imagePath
         })
     }
-    location.reload();
   })
 
 
