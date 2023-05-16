@@ -45,7 +45,11 @@
         var today = new Date();
         var dateString = String(today.getDate()).padStart(2, '0') + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + today.getFullYear();
 
-        var imagePath = "Projects/"+URLParams.get("proj-id")+"/"+selectVal;
+        if (images.length > 0) {
+          imagePath = "Projects/"+URLParams.get("proj-id")+"/"+selectVal;
+        } else {
+          imagePath = "None";
+        }
 
         set(ref(database, "Projects/" + URLParams.get("proj-id") + "/checkpoints/" + selectVal), {
             Completed: true,
