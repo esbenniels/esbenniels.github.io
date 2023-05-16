@@ -44,7 +44,7 @@
         // send update email
         var today = new Date();
         var dateString = String(today.getDate()).padStart(2, '0') + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + today.getFullYear();
-
+        var imagePath;
         if (images.length > 0) {
           imagePath = "Projects/"+URLParams.get("proj-id")+"/"+selectVal;
         } else {
@@ -72,7 +72,7 @@
 document.getElementById("gen-btn").addEventListener("click", (e) => {
   e.preventDefault();
   var projID = document.getElementById("inputProjID").value;
-  var getURL = "https://api.qrserver.com/v1/create-qr-code/?data=https://esbenniels.github.io/?proj-id=" + projID + ";size=100x100";
+  var getURL = "https://api.qrserver.com/v1/create-qr-code/?data=https://esbenniels.github.io/?proj-id=" + projID + "&size=200x200";
   console.log(getURL);
   var img = document.createElement("img");
   img.src = getURL;
