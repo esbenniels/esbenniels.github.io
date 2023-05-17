@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+ <html>
+ 
+ <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
+     <title>FORCE Technology Kundeportal</title>
+ 
+     <!-- Bootstrap CSS CDN -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+ 
+     <!-- Our Custom CSS -->
+     <link rel="stylesheet" href="home.css">
+     <!-- Scrollbar Custom CSS -->
+     <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- Font Awesome JS -->
+     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+         crossorigin="anonymous"></script>
+     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+         crossorigin="anonymous"></script>
+ 
+ </head>
+ 
+ <body>
+     <div class="wrapper">
+         <!-- Sidebar  -->
+         <nav id="sidebar">
+             <div class="sidebar-header">
+                 <h3>FORCE Technology Kundeportal</h3>
+             </div>
+ 
+             <ul class="list-unstyled components">
+                 <li>
+                     <a href="index.html">Hjemmeside
+                         <svg xmlns="http://www.w3.org/2000/svg " style="text-align: right" width="16" height="16"
+                             fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                             <path fill-rule="evenodd"
+                                 d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                             <path fill-rule="evenodd"
+                                 d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                         </svg>
+                     </a>
+                 </li>
+                 <li id = 'login'>
+                    <a data-toggle="modal" data-target="#loginModal" href="#">
+                        Login
+                    </a>
+                 </li>
+                 <li id = 'reg'>
+                     <a data-toggle="modal" data-target="#regModal" href = "#">
+                         Register
+                     </a>
+                 </li>
+                 <li id = 'proj'>
+                     <a href="projectInfo.html">
+                         Project Information
+                     </a>
+                 </li>
+                 <li class="nav-item" id = 'logout'>
+                     <a id="logout-btn" href="#">Logout</a>
+                 </li>
+             </ul>
+             
+ 
+             <div class="footer-on-the-bottom">
+                 <footer class='footer fixed-bottom' style='padding-bottom: 10px;'>
+                     <div style="margin-left: 60px; width: 185px;align-content: center;">
+                         <span style="text-align: center;" id="sign-in-state">Signed Out</span>
+                     </div>
+                 </footer>
+             </div>
+ 
+         </nav>
+ 
+         <!-- Login Modal -->
+         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Kunde Login</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body">
+                         <form class="row g-3" id='login-form'>
+                             <div class="col-md-6">
+                                 <label for="inputEmailLogin" class="form-label">Email</label>
+                                 <input type="email" class="form-control" id="inputEmailLogin">
+                             </div>
+                             <div class="col-md-6">
+                                 <label for="inputPasswordLogin" class="form-label">Adgangskode</label>
+                                 <input type="password" class="form-control" id="inputPasswordLogin">
+                             </div>
+ 
+                             <div class="col-12">
+                                 <button class="btn btn-primary" id='login-btn'>Login</button>
+                             </div>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+         </div>
+ 
+         <!-- Registration Modal -->
+         <div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Kunderegistrering</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body">
+                         <form class="row g-3" id='reg-form'>
+                             <div class="col-md-6">
+                                 <label for="inputFName" class="form-label">Fornavn</label>
+                                 <input type="text" class="form-control" id="inputFName">
+                             </div>
+                             <div class="col-md-6">
+                                 <label for="inputLName" class="form-label">Efternavn</label>
+                                 <input type="text" class="form-control" id="inputLName">
+                             </div>
+                             <div class="col-md-12">
+                                <label for="inputComp" class="form-label">Firme</label>
+                                <input type="text" class="form-control" id="inputComp">
+                             </div>
+                             <div class="col-md-6">
+                                 <label for="inputEmail" class="form-label">Email</label>
+                                 <input type="email" class="form-control" id="inputEmail">
+                             </div>
+                             <div class="col-md-6">
+                                <label for="inputPassword" class="form-label">Adgangskode</label>
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                             <div class="col-12">
+                                 <button class="btn btn-primary" id='reg-btn'>Registrere</button>
+                             </div>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+         </div>
+ 
+         <div id="content" class = "text-center">
+             <div class="text-center">
+                 <h1>FORCE Technology Kundeportal</h1>
+             </div>
+             <div class="container pad">
+                 <div class="pad" id = 'loginMessage'></div>
+             </div>
+         </div>
+          
+     </div>
+ 
+     
+ 
+     <!-- jQuery CDN - Slim version (=without AJAX) -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+         crossorigin="anonymous"></script>
+     <!-- Popper.JS -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+         crossorigin="anonymous"></script>
+     <!-- Bootstrap JS -->
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+         crossorigin="anonymous"></script>
+     <!-- jQuery Custom Scroller CDN -->
+     <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+ 
+ 
+     <script type="text/javascript">
+         $(document).ready(function () {
+             $("#sidebar").mCustomScrollbar({
+                 theme: "minimal"
+             });
+ 
+             $('#sidebarCollapse').on('click', function () {
+                 $('#sidebar, #content').toggleClass('active');
+                 $('.collapse.in').toggleClass('in');
+                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+             });
+         });
+     </script>
+     <script type = "module" src="../JS/index.js"></script>
+ 
+ 
+ </body>
+ 
+ </html>

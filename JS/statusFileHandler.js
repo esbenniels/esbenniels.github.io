@@ -37,17 +37,18 @@ document.getElementById("submit").addEventListener("click", (e) => {
         var imagePath;
         if (images.length > 0) {
           imagePath = "Projects/"+URLParams.get("proj-id")+"/"+removeSpaces(selectVal);
-        } else {
-          imagePath = "None";
-        }
-        console.log(imagePath);
-        for (var image in images) {
+          for (var image in images) {
             let ImageRef = ref(storage, "Projects/" + URLParams.get("proj-id") + "/" + removeSpaces(selectVal) + "/" + images[image].name);
             uploadBytes(ImageRef, images[image]).then((e) => {
                 console.log("uploaded file");
             })
-        }  
-        // alert("Opdatering Gennemført");
+          }  
+        } else {
+          imagePath = "None";
+        }
+        console.log(imagePath);
+        
+        alert("Opdatering Gennemført");
     }
     
   })

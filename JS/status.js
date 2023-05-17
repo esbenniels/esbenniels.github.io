@@ -1,29 +1,32 @@
- // Import the functions you need from the SDKs you need
- import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 
- // Your web app's Firebase configuration
- // For Firebase JS SDK v7.20.0 and later, measurementId is optional
- const firebaseConfig = {
-    apiKey: "AIzaSyC_9PErbiUyRt48NERyTPvMzskcCNhGPPg",
-    authDomain: "qr-codekundeopdater.firebaseapp.com",
-    databaseURL: "https://qr-codekundeopdater-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "qr-codekundeopdater",
-    storageBucket: "qr-codekundeopdater.appspot.com",
-    messagingSenderId: "568913652858",
-    appId: "1:568913652858:web:ebc58b3c6ff9f8f2f15fc3",
-    measurementId: "G-C9JBQH20T0"
-  };
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+   apiKey: "AIzaSyC_9PErbiUyRt48NERyTPvMzskcCNhGPPg",
+   authDomain: "qr-codekundeopdater.firebaseapp.com",
+   databaseURL: "https://qr-codekundeopdater-default-rtdb.europe-west1.firebasedatabase.app",
+   projectId: "qr-codekundeopdater",
+   storageBucket: "qr-codekundeopdater.appspot.com",
+   messagingSenderId: "568913652858",
+   appId: "1:568913652858:web:ebc58b3c6ff9f8f2f15fc3",
+   measurementId: "G-C9JBQH20T0"
+ };
 
-  function removeSpaces(input) {
+ const app = initializeApp(firebaseConfig);
+
+ function removeSpaces(input) {
     return input.replace(" ", "_");
   }
 
-  const app = initializeApp(firebaseConfig);
 
-  import {getDatabase, ref, set, onValue, child, get, push, update} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
-  const database = getDatabase(app);
+import {getDatabase, ref, set, onValue} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+const database = getDatabase(app);
 
 //   console.log("URL Arguments: ", window.location.search);
+
+  var email;
 
   const URLParams = new URLSearchParams(window.location.search);
   onValue(ref(database, "Projects/" + URLParams.get("proj-id")), (snapshot) => {
@@ -35,6 +38,7 @@
         document.getElementById("status-select").appendChild(newOption);
         // console.log("New Option Created: ", cp);
     }
+    email = snapshot.val().clientInfo.Email;
   })
 
 
@@ -60,6 +64,8 @@
             Completed: true,
             DateCompleted: dateString,
             ImagePath: imagePath
+        }).then(() => {
+            console.log("Sending email to: ", email);
         })
     }
   })
@@ -75,6 +81,7 @@
 
 document.getElementById("gen-btn").addEventListener("click", (e) => {
   e.preventDefault();
+  removeAllChildNodes(document.getElementById("qrcode"));
   var projID = document.getElementById("inputProjID").value;
   var getURL = "https://api.qrserver.com/v1/create-qr-code/?data=https://esbenniels.github.io/?proj-id=" + projID + "&size=200x200";
   console.log(getURL);
@@ -83,4 +90,12 @@ document.getElementById("gen-btn").addEventListener("click", (e) => {
   img.alt = "";
   img.title = "";
   document.getElementById("qrcode").appendChild(img);
+})
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+      document.getElementById('sign-in-state').innerText = "Signed In";
+  } else {
+      document.getElementById('sign-in-state').innerText = "Signed Out";
+  }
 })
